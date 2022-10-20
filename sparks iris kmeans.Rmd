@@ -1,0 +1,28 @@
+---
+title: "TSF GRIP task"
+author: "Manideepa Sanyal"
+date: '2022-10-07'
+output: html_document
+---
+
+```{r }
+data("iris")
+head(iris)
+#remove 5th col from iris
+iris1<-iris[-5]
+View(iris1)
+#scale the data
+iris1<-scale(iris1)
+View(iris1) 
+library(NbClust)
+library(cluster)
+library(factoextra)
+fviz_nbclust(iris1, kmeans, method = "wss")
+#elbow occurs at k=3 so the optimum no. of clusters is 3
+set.seed(1234)
+#perform k-means clustering with k =3 clusters
+km <- kmeans(iris1, centers = 3, nstart = 25)
+km
+fviz_cluster(km, data = iris1)
+```
+
